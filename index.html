@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Árbol de Navidad con el nombre Selena</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+      background-color: rgb(251, 252, 253);
+    }
+
+    .snowflake {
+      position: absolute;
+      font-size: 20px;
+      color: white;
+      opacity: 0.8;
+      animation: snow 5s infinite linear;
+    }
+
+    @keyframes snow {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    .content {
+      display: flex;
+      align-items: center;
+      z-index: 2;
+    }
+
+    #left-tree, #right-tree {
+      font-size: 48px;
+      margin-right: 10px;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    #tree {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .layer {
+      font-size: 36px;
+      color: transparent;
+      margin-bottom: 10px;
+      opacity: 0;
+      transition: opacity 0.5s, color 0.5s;
+    }
+
+    .layer.show {
+      opacity: 1;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const name = "Selena";
+      const tree = document.getElementById("tree");
+      const leftTree = document.getElementById("left-tree");
+      const rightTree = document.getElementById("right-tree");
+
+      for (let i = 0; i < name.length; i++) {
+        const layer = document.createElement("div");
+        layer.classList.add("layer");
+        layer.textContent = "🎄";
+        tree.appendChild(layer);
+
+        // Agregar clase 'show' después de un breve retraso
+        setTimeout(() => {
+          layer.textContent = name.substring(0, i + 1);
+          layer.classList.add("show");
+          // Agregar el árbol izquierdo y derecho
+          leftTree.style.opacity = 1;
+          rightTree.style.opacity = 1;
+        }, 500 * i);
+      }
+
+      // Crear copos de nieve
+      const snowflakeContainer = document.getElementById("snowflakes");
+      for (let i = 0; i < 50; i++) {
+        const snowflake = document.createElement("div");
+        snowflake.classList.add("snowflake");
+        snowflake.textContent = "❄️";
+        snowflake.style.left = Math.random() * 100 + "vw";
+        snowflake.style.top = Math.random() * 50 + "vh"; // Ajuste en la posición inicial vertical
+        snowflake.style.animationDuration = (Math.random() * 2 + 1) + "s";
+        snowflakeContainer.appendChild(snowflake);
+      }
+    });
+  </script>
+  <div id="snowflakes"></div>
+  <div class="content">
+    <div id="left-tree">🎄</div>
+    <div id="tree">
+      <div class="layer">S</div>
+    </div>
+    <div id="right-tree">🎄</div>
+  </div>
+</body>
+</html>
